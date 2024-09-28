@@ -15,7 +15,6 @@ public class TaskDistributor : MonoBehaviour
 
     private void Start()
     {
-        _units = new List<Unit>();
         _newBasesTransforms = new List<Transform>();
     }
 

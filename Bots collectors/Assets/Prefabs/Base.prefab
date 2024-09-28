@@ -1044,7 +1044,8 @@ MonoBehaviour:
   _crystals: []
   _baseTransform: {fileID: 1828022394674673220}
   _flagSetter: {fileID: 2050359122108783233}
-  _freeUnits: []
+  _testUnit: {fileID: 0}
+  _units: []
 --- !u!114 &1859652725915620425
 MonoBehaviour:
   m_ObjectHideFlags: 0
