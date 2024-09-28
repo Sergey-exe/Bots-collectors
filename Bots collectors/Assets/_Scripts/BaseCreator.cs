@@ -36,8 +36,8 @@ public class BaseCreator : MonoBehaviour
     {
         TaskDistributor taskDistributor = newBase.GetComponent<TaskDistributor>();
         _startUnit.SetTaskTransform(newBase.transform);
-        _startUnit.IsFree += taskDistributor.AddFreeUnit;
         _startUnit.InvokeFree();
+        taskDistributor.AddUnit(_startUnit);
         IsCreate?.Invoke(this);
     }
 }

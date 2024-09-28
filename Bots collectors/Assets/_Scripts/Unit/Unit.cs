@@ -3,14 +3,12 @@ using UnityEngine;
 using UnityEngine.Events;
 public class Unit : MonoBehaviour 
 {
-    [SerializeField] private bool _isWork;
     [SerializeField] private UnitMover _mover;
+
+    public bool IsWork { get; private set; }
 
     public bool MoveToFlag { get; private set; }
 
-    public event UnityAction<Unit> IsFree;
-
-    [ContextMenu(nameof(Start))]
     private void Start()
     {
         InvokeFree();
@@ -22,14 +20,13 @@ public class Unit : MonoBehaviour
             return;
 
         _mover.SetTackTransform(transform);
-        _isWork = true;
+        IsWork = true;
     }
 
     public void InvokeFree()
     {
         _mover.SetTackTransform(null);
-        _isWork = false;
-        IsFree?.Invoke(this);
+        IsWork = false;
     }
 
     public void ChangeFlagMoveToFlag(bool moveToFlag)

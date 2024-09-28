@@ -745,7 +745,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 615110752153199825, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: _searchRadius
-      value: 80
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1828022394674673220, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: m_LocalPosition.x
