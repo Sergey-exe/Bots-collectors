@@ -10,7 +10,7 @@ public class TaskDistributor : MonoBehaviour
     [SerializeField] private Transform _baseTransform;
     [SerializeField] private FlagSetter _flagSetter;
 
-    private List<Unit> _freeUnits;
+    [SerializeField] private List<Unit> _freeUnits;
     private List<Transform> _newBasesTransforms;
 
     private void Start()
@@ -23,32 +23,52 @@ public class TaskDistributor : MonoBehaviour
     private void OnEnable()
     {
         _unitSpawner.OnSpawn += SubscribeToSpawn;
-        _flagSetter.IsSetFlag += GiveNewBaseFlag;
+        _flagSetter.IsSetFlag += AddNewBaseFlag;
     }
 
     private void OnDisable()
     {
         _unitSpawner.OnSpawn -= SubscribeToSpawn;
-        _flagSetter.IsSetFlag -= GiveNewBaseFlag;
+        _flagSetter.IsSetFlag -= AddNewBaseFlag;
     }
 
     private void Update()
     {
-        if (_crystals.Count > 0)
-            if (_freeUnits.Count > 0)
+        if (_freeUnits.Count > 0)
+        {
+            if (_newBasesTransforms.Count > 0)
+                GiveNewBaseFlag();
+            else if (_crystals.Count >= 0)
                 GiveTask(GetTaskTransform());
+        }
+    }
+
+    public void GiveNewBaseFlag()
+    {
+        for (int i = 0; i < _freeUnits.Count; i++)
+        {
+            for (int j = _newBasesTransforms.Count - 1; j >= 0; j--)
+            {
+                _freeUnits[i].SetTaskTransform(_newBasesTransforms[j]);
+                _freeUnits[i].ChangeFlagMoveToFlag(true);
+                _freeUnits[i].GetComponent<PickerObject>().PickObject -= GiveBaseTransform;
+                _freeUnits[i].IsFree -= AddFreeUnit;
+                _newBasesTransforms.RemoveAt(j);
+                _freeUnits.RemoveAt(i);
+            }
+        }
     }
 
     public void GiveTask(Transform transform)
     {
-        for(int i = 0; i < _freeUnits.Count; i++)
+        for (int i = 0; i < _freeUnits.Count; i++)
         {
             _freeUnits[i].SetTaskTransform(transform);
             _freeUnits.RemoveAt(i);
         }
     }
 
-    public void GiveNewBaseFlag(Transform flagTransform)
+    public void AddNewBaseFlag(Transform flagTransform)
     {
         _newBasesTransforms.Add(flagTransform);
     }
@@ -62,15 +82,6 @@ public class TaskDistributor : MonoBehaviour
     {
         if (_crystals.Count == 0)
             SearchCrystal();
-
-        if(_newBasesTransforms.Count > 0)
-        {
-            Transform newTaskTransform = _newBasesTransforms[0];
-            _newBasesTransforms.RemoveAt(0);
-
-            return newTaskTransform;
-        }
-            
 
         for (int i = 0; i < _crystals.Count; i++) 
         {
@@ -90,11 +101,6 @@ public class TaskDistributor : MonoBehaviour
     {
         _freeUnits.Add(unit);
         unit.GetComponent<PickerObject>().PickObject += GiveBaseTransform;
-    }
-
-    public void RemoveUnit(Unit unit) 
-    {
-        unit.GetComponent<PickerObject>().PickObject -= GiveBaseTransform;
     }
 
     private void SearchCrystal()

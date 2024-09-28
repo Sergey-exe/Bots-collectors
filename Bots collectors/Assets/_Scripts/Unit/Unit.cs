@@ -6,6 +6,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool _isWork;
     [SerializeField] private UnitMover _mover;
 
+    public bool MoveToFlag { get; private set; }
+
     public event UnityAction<Unit> IsFree;
 
     [ContextMenu(nameof(Start))]
@@ -28,5 +30,10 @@ public class Unit : MonoBehaviour
         _mover.SetTackTransform(null);
         _isWork = false;
         IsFree?.Invoke(this);
+    }
+
+    public void ChangeFlagMoveToFlag(bool moveToFlag)
+    {
+        MoveToFlag = moveToFlag;
     }
 }

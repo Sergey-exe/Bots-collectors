@@ -18,6 +18,7 @@ public class FlagSetter : MonoBehaviour
                 Flag flag = Instantiate(_flagPrefab, _cursorRaycaster.hitPosition, _flagPrefab.transform.rotation);
                 IsSetFlag?.Invoke(flag.transform);
                 _flagInstalling = false;
+                flag.GetComponent<BaseCreator>().IsCreate += DestroyFlag;
             }
         }
     }
@@ -30,5 +31,11 @@ public class FlagSetter : MonoBehaviour
     public void SetFlag()
     {
         _flagInstalling = true;
+    }
+
+    public void DestroyFlag(BaseCreator flag)
+    {
+        flag.IsCreate -= DestroyFlag;
+        Destroy(flag.gameObject);
     }
 }

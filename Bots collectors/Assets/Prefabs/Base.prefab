@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 8024962104408338234, guid: 362c9c9835abb5d49bf4dde864fc9103, type: 3}
-  _spawnCount: 3
+  _spawnCount: 0
   _offset: 10
   _spawnPoint: {fileID: 6716938281492041842}
 --- !u!114 &615110752153199825
@@ -1044,6 +1044,7 @@ MonoBehaviour:
   _crystals: []
   _baseTransform: {fileID: 1828022394674673220}
   _flagSetter: {fileID: 2050359122108783233}
+  _freeUnits: []
 --- !u!114 &1859652725915620425
 MonoBehaviour:
   m_ObjectHideFlags: 0

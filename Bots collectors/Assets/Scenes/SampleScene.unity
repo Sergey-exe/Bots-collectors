@@ -743,6 +743,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 615110752153199825, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
+      propertyPath: _searchRadius
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 1828022394674673220, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.7
@@ -787,6 +791,10 @@ PrefabInstance:
       propertyPath: _cursorRaycaster
       value: 
       objectReference: {fileID: 963194229}
+    - target: {fileID: 2644924096075742580, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
+      propertyPath: _spawnCount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7253927425615176335, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: m_Camera
       value: 
