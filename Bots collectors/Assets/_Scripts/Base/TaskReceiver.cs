@@ -6,9 +6,7 @@ public class TaskReceiver : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        PickerObject pickerObject;
-
-        if(pickerObject = other.GetComponent<PickerObject>())
+        if(other.TryGetComponent(out PickerObject pickerObject))
         {
             int countCrystals = pickerObject.GiveToBase();
             _dataBase.AddCrystals(countCrystals);

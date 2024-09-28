@@ -12,4 +12,10 @@ public class DataBase : MonoBehaviour
         CountCrystals += count;
         ChangeCrystals?.Invoke(CountCrystals);
     }
+
+    public void RemoveCrystals(int count)
+    {
+        CountCrystals -= count;
+        ChangeCrystals?.Invoke(CountCrystals);
+    }
 }
