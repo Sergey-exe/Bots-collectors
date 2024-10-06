@@ -9,8 +9,9 @@ public class TaskDistributor : MonoBehaviour
     [SerializeField] private List<PickingObject> _crystals;
     [SerializeField] private Transform _baseTransform;
     [SerializeField] private FlagSetter _flagSetter;
-
     [SerializeField] private List<Unit> _units;
+
+    private int _minCountUnits = 1;
     private List<Transform> _newBasesTransforms;
 
     private void Start()
@@ -32,10 +33,11 @@ public class TaskDistributor : MonoBehaviour
 
     private void Update()
     {
-        if (_newBasesTransforms.Count > 0)
+        if (_newBasesTransforms.Count > 0 & _units.Count > _minCountUnits)
             GiveNewBaseFlag();
         else
             GiveTask();
+        
     }
 
     public void GiveNewBaseFlag()

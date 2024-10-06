@@ -6,6 +6,8 @@ public class FlagSetter : MonoBehaviour
     [SerializeField] private bool _flagInstalling;
     [SerializeField] private Flag _flagPrefab;
     [SerializeField] private CursorRaycaster _cursorRaycaster;
+    [SerializeField] private BaseCreator _baseCreator;
+    [SerializeField] private InputReader _inputReader;
 
     public event UnityAction<Transform> IsSetFlag;
 
@@ -13,19 +15,31 @@ public class FlagSetter : MonoBehaviour
     {
         if (_flagInstalling & _cursorRaycaster != null)
         {
-            if (Input.GetKeyUp(KeyCode.Mouse1)) 
+            if (_inputReader.DownButtonSetFlag()) 
             {
                 Flag flag = Instantiate(_flagPrefab, _cursorRaycaster.hitPosition, _flagPrefab.transform.rotation);
                 IsSetFlag?.Invoke(flag.transform);
                 _flagInstalling = false;
-                flag.GetComponent<BaseCreator>().IsCreate += DestroyFlag;
+                flag.HasUnit += _baseCreator.CreateNewBase;
+                flag.Collision += DestroyFlag;
             }
         }
     }
 
-    public void InitRaycaster(CursorRaycaster cursorRaycaster)
+    public void Init(CursorRaycaster cursorRaycaster, InputReader inputReader)
     {
         _cursorRaycaster = cursorRaycaster;
+        _inputReader = inputReader;
+    }
+
+    public CursorRaycaster GetRaycaster() 
+    { 
+        return _cursorRaycaster; 
+    }
+
+    public InputReader GetInputReader()
+    {
+        return _inputReader;
     }
 
     public void SetFlag()
@@ -33,9 +47,9 @@ public class FlagSetter : MonoBehaviour
         _flagInstalling = true;
     }
 
-    public void DestroyFlag(BaseCreator flag)
+    public void DestroyFlag(Flag flag)
     {
-        flag.IsCreate -= DestroyFlag;
+        flag.Collision -= DestroyFlag;
         Destroy(flag.gameObject);
     }
 }

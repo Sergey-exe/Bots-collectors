@@ -16,7 +16,8 @@ public class CrystalSearcher : MonoBehaviour
             PickingObject crystal;
 
             if(crystal = hit.GetComponent<PickingObject>())
-                crystals.Add(crystal);
+                if(crystal.IsFree)
+                    crystals.Add(crystal);
         }
 
         return crystals;

@@ -890,6 +890,7 @@ GameObject:
   - component: {fileID: 3378422308510398115}
   - component: {fileID: 5739721546866698295}
   - component: {fileID: 2050359122108783233}
+  - component: {fileID: -8931629473679260320}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -1013,6 +1014,7 @@ MonoBehaviour:
   _prefab: {fileID: 8024962104408338234, guid: 362c9c9835abb5d49bf4dde864fc9103, type: 3}
   _spawnCount: 0
   _offset: 10
+  _autoSpawn: 0
   _spawnPoint: {fileID: 6716938281492041842}
 --- !u!114 &615110752153199825
 MonoBehaviour:
@@ -1026,7 +1028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842e1d3729666564a820416b4d19c87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _searchRadius: 80
+  _searchRadius: 55
 --- !u!114 &6263285944547979861
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,7 +1046,6 @@ MonoBehaviour:
   _crystals: []
   _baseTransform: {fileID: 1828022394674673220}
   _flagSetter: {fileID: 2050359122108783233}
-  _testUnit: {fileID: 0}
   _units: []
 --- !u!114 &1859652725915620425
 MonoBehaviour:
@@ -1105,3 +1106,18 @@ MonoBehaviour:
   _flagInstalling: 0
   _flagPrefab: {fileID: 6575847786015818199, guid: 504aa7cec0a82a84ba135e4e572d21d1, type: 3}
   _cursorRaycaster: {fileID: 0}
+  _baseCreator: {fileID: -8931629473679260320}
+  _inputReader: {fileID: 0}
+--- !u!114 &-8931629473679260320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8955956334551648906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8f00639d94bf6e44871f41104ae4f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spawner: {fileID: 0}

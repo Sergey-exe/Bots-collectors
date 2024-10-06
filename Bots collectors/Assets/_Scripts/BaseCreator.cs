@@ -13,28 +13,36 @@ public class BaseCreator : MonoBehaviour
 
     private void OnEnable()
     {
-        _spawner.OnSpawn += GetUnitToNewBase;
+        if(_spawner)
+            _spawner.OnSpawn += TransferUnitToNewBase;
     }
 
     private void OnDisable()
     {
-        _spawner.OnSpawn -= GetUnitToNewBase;
+        _spawner.OnSpawn -= TransferUnitToNewBase;
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void CreateNewBase(Unit unitInFlag, Transform point)
     {
-        int countBases = 1;
+        int countSpawnBases = 1;
 
-        if(other.TryGetComponent(out Unit unit))
-        {
-            _startUnit = unit;
-            _spawner.ArrangeSpawnObjects(countBases);
-        }
+        _startUnit = unitInFlag;
+        _spawner.InitSpawnPoint(point);
+        _spawner.ArrangeSpawnObjects(countSpawnBases);
     }
 
-    private void GetUnitToNewBase(Base newBase)
+    public void InitSpawner(BaseSpawner spawner)
+    {
+        _spawner = spawner;
+        _spawner.OnSpawn += TransferUnitToNewBase;
+    }
+
+    private void TransferUnitToNewBase(Base newBase)
     {
         TaskDistributor taskDistributor = newBase.GetComponent<TaskDistributor>();
+        FlagSetter flagSetter = GetComponent<FlagSetter>();
+        newBase.GetComponent<BaseCreator>().InitSpawner(_spawner);
+        newBase.GetComponent<FlagSetter>().Init(flagSetter.GetRaycaster(), flagSetter.GetInputReader());
         _startUnit.SetTaskTransform(newBase.transform);
         _startUnit.InvokeFree();
         taskDistributor.AddUnit(_startUnit);

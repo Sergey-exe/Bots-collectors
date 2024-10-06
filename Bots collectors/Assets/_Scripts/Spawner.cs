@@ -6,6 +6,7 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] private T _prefab;
     [SerializeField] private int _spawnCount;
     [SerializeField] private float _offset;
+    [SerializeField] private bool _autoSpawn;
     [SerializeField] Transform _spawnPoint;
 
     private Vector3 _defaultTransform;
@@ -15,7 +16,9 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     private void Start()
     {
         _defaultTransform = _spawnPoint.position;
-        ArrangeSpawnObjects(_spawnCount);
+
+        if(_autoSpawn)
+            ArrangeSpawnObjects(_spawnCount);
     }
 
     public virtual void ArrangeSpawnObjects(int spawnCount)
@@ -28,5 +31,10 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
         }
 
         _spawnPoint.position = _defaultTransform;
+    }
+
+    public void InitSpawnPoint(Transform newSpawnPoint)
+    {
+        _spawnPoint = newSpawnPoint;
     }
 }

@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 7846969293487867882}
   - component: {fileID: -7980577505297684954}
   - component: {fileID: 6575847786015818199}
-  - component: {fileID: 2428271331818714096}
-  - component: {fileID: 8470342706907970718}
   m_Layer: 0
   m_Name: Flag
   m_TagString: Untagged
@@ -120,32 +118,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5403d2fc9dbf8da4ab91050ae324cd64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2428271331818714096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4360569635374736615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8f00639d94bf6e44871f41104ae4f8f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawner: {fileID: 8470342706907970718}
---- !u!114 &8470342706907970718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4360569635374736615}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4337c33b32db80244bc8911190de4fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _prefab: {fileID: 2626449760751561049, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
-  _spawnCount: 0
-  _offset: 0
-  _spawnPoint: {fileID: 6979939467079332842}

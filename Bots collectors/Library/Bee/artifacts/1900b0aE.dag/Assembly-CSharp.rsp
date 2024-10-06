@@ -367,6 +367,7 @@
 "Assets/_Scripts/CrystalSpawner.cs"
 "Assets/_Scripts/CursorRaycaster.cs"
 "Assets/_Scripts/Flag.cs"
+"Assets/_Scripts/InputReader.cs"
 "Assets/_Scripts/Spawner.cs"
 "Assets/_Scripts/Unit/PickerObject.cs"
 "Assets/_Scripts/Unit/Unit.cs"

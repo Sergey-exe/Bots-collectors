@@ -175,8 +175,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 2428271331818714096, guid: 504aa7cec0a82a84ba135e4e572d21d1, type: 3}
-    - {fileID: 8470342706907970718, guid: 504aa7cec0a82a84ba135e4e572d21d1, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
     - {fileID: 6575847786015818199, guid: 504aa7cec0a82a84ba135e4e572d21d1, type: 3}
     - {fileID: -7980577505297684954, guid: 504aa7cec0a82a84ba135e4e572d21d1, type: 3}
     m_RemovedGameObjects: []
@@ -199,7 +199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &550077677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,6 +215,7 @@ MonoBehaviour:
   _prefab: {fileID: 742793898785278032, guid: 46a24dba094fe8b4b856d0589be957f8, type: 3}
   _spawnCount: 15
   _offset: 4
+  _autoSpawn: 1
   _spawnPoint: {fileID: 550077678}
 --- !u!4 &550077678
 Transform:
@@ -357,6 +358,7 @@ MonoBehaviour:
   _prefab: {fileID: 742793898785278032, guid: 46a24dba094fe8b4b856d0589be957f8, type: 3}
   _spawnCount: 15
   _offset: 6
+  _autoSpawn: 1
   _spawnPoint: {fileID: 895658906}
 --- !u!4 &895658906
 Transform:
@@ -385,6 +387,7 @@ GameObject:
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
+  - component: {fileID: 963194230}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -478,6 +481,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e42d55620ea2c44ebdca2d9bc752d97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &963194230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cd0f89acceb5874186bf7d32d735434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _keysSetFlag: 43010000
 --- !u!1 &1162175388
 GameObject:
   m_ObjectHideFlags: 0
@@ -639,6 +655,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1326237141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326237143}
+  - component: {fileID: 1326237142}
+  m_Layer: 0
+  m_Name: Base Spawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1326237142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326237141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4337c33b32db80244bc8911190de4fb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 2626449760751561049, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
+  _spawnCount: 0
+  _offset: 100
+  _autoSpawn: 0
+  _spawnPoint: {fileID: 1326237143}
+--- !u!4 &1326237143
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326237141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.13506448, y: -94.95264, z: 312.8387}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1378826963
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1378826964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,6 +736,7 @@ MonoBehaviour:
   _prefab: {fileID: 742793898785278032, guid: 46a24dba094fe8b4b856d0589be957f8, type: 3}
   _spawnCount: 15
   _offset: 4
+  _autoSpawn: 1
   _spawnPoint: {fileID: 1378826965}
 --- !u!4 &1378826965
 Transform:
@@ -719,6 +785,7 @@ MonoBehaviour:
   _prefab: {fileID: 742793898785278032, guid: 46a24dba094fe8b4b856d0589be957f8, type: 3}
   _spawnCount: 15
   _offset: 4
+  _autoSpawn: 1
   _spawnPoint: {fileID: 1718419570}
 --- !u!4 &1718419570
 Transform:
@@ -743,9 +810,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8931629473679260320, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
+      propertyPath: _spawner
+      value: 
+      objectReference: {fileID: 1326237142}
     - target: {fileID: 615110752153199825, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: _searchRadius
-      value: 100
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 1828022394674673220, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -788,9 +859,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2050359122108783233, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
+      propertyPath: _inputReader
+      value: 
+      objectReference: {fileID: 963194230}
+    - target: {fileID: 2050359122108783233, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: _cursorRaycaster
       value: 
       objectReference: {fileID: 963194229}
+    - target: {fileID: 2644924096075742580, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
+      propertyPath: _autoSpawn
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2644924096075742580, guid: 0726a9eb09575e342a5adad8058ce95d, type: 3}
       propertyPath: _spawnCount
       value: 3
@@ -803,7 +882,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Base
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -822,3 +902,4 @@ SceneRoots:
   - {fileID: 550077678}
   - {fileID: 1290672597}
   - {fileID: 265662167}
+  - {fileID: 1326237143}
