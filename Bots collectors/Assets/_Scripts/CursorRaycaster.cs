@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CursorRaycaster : MonoBehaviour
 {
-    public Vector3 hitPosition {  get; private set; }
+    public Vector3 HitPosition {  get; private set; }
 
     private void LateUpdate()
     {
@@ -14,7 +14,7 @@ public class CursorRaycaster : MonoBehaviour
 
         if(Physics.Raycast(ray, out hit))
         {
-            hitPosition = hit.point;
+            HitPosition = hit.point;
         }
     }
 }

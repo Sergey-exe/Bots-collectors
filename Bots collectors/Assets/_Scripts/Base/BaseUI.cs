@@ -4,7 +4,7 @@ using TMPro;
 public class BaseUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _crystalText;
-    [SerializeField] private DataBase _dataBase;
+    [SerializeField] private Database _dataBase;
 
     private void Start()
     {

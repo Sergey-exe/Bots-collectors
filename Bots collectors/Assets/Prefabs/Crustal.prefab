@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5933921290198616251}
   - component: {fileID: 976283836338525203}
   - component: {fileID: 742793898785278032}
+  - component: {fileID: 7828298560755592497}
   - component: {fileID: -3346450094591994515}
   m_Layer: 0
   m_Name: Crustal
@@ -121,7 +122,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: -3346450094591994515}
   <Denomination>k__BackingField: 1
-  <IsFree>k__BackingField: 1
+--- !u!114 &7828298560755592497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4811985932926517227}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c8838dc3af834f46878d141c00e94cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &-3346450094591994515
 Rigidbody:
   m_ObjectHideFlags: 0

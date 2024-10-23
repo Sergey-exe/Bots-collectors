@@ -9,39 +9,51 @@ public class BaseShop : MonoBehaviour
     [SerializeField] private int _unitPrice;
     [SerializeField] private Button _spawnUnitButton;
     [SerializeField] private Button _spawnBaseButton;
-    [SerializeField] private DataBase _dataBase;
+    [SerializeField] private Database _dataBase;
     [SerializeField] private UnitSpawner _spawner;
     [SerializeField] private FlagSetter _flagSetter;
 
+    private bool _creatingNewBase = false;
+
     private void OnEnable()
     {
-        _spawnUnitButton.onClick.AddListener(PurchaseUnit);
-        _spawnBaseButton.onClick.AddListener(PurchaseBase);
+        _dataBase.ChangeCrystals += Purchase;
+        _spawnBaseButton.onClick.AddListener(StartCreateNewBase);
     }
 
     private void OnDisable()
     {
-        _spawnUnitButton.onClick.RemoveListener(PurchaseUnit);
-        _spawnBaseButton.onClick.RemoveListener(PurchaseBase);
+        _dataBase.ChangeCrystals -= Purchase;
+        _spawnBaseButton.onClick.RemoveListener(StartCreateNewBase);
     }
 
-    private void PurchaseUnit()
+    private void Purchase(int countCrystals)
     {
         int countSpawnUnits = 1;
 
-        if(_dataBase.CountCrystals >= _unitPrice)
+        if (_creatingNewBase)
+        {
+            if(countCrystals >= _basePrice)
+            {
+                PurchaseBase();
+                _creatingNewBase = false;
+            }
+        }
+        else if (countCrystals >= _unitPrice)
         {
             _dataBase.RemoveCrystals(_unitPrice);
             _spawner.ArrangeSpawnObjects(countSpawnUnits);
         }
     }
 
+    private void StartCreateNewBase()
+    {
+        _creatingNewBase = true;
+    }
+
     private void PurchaseBase()
     {
-        if (_dataBase.CountCrystals >= _basePrice)
-        {
-            _dataBase.RemoveCrystals(_basePrice);
-            _flagSetter.SetFlag();
-        }
+        _dataBase.RemoveCrystals(_basePrice);
+        _flagSetter.SetFlag();
     }
 }

@@ -4,21 +4,27 @@ public class CrystalSpawner : Spawner<PickingObject>
 {
     private void OnEnable()
     {
-        OnSpawn += SubscribeToSpawn;
+        Spawned += SubscribeToSpawn;
     }
 
     private void OnDisable()
     {
-        OnSpawn -= SubscribeToSpawn;
+        Spawned -= SubscribeToSpawn;
     }
 
     private void SubscribeToSpawn(PickingObject pickingObject)
     {
         pickingObject.TransferredToBase += DestroyObject;
+        pickingObject.Discovered += DestroyCrystal;
     }
 
     private void DestroyObject(GameObject pickingObject)
     {
         Destroy(pickingObject);
+    }
+
+    private void DestroyCrystal(Crystal crystal)
+    {
+        Destroy(crystal);
     }
 }

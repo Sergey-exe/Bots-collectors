@@ -17,7 +17,7 @@ public class FlagSetter : MonoBehaviour
         {
             if (_inputReader.DownButtonSetFlag()) 
             {
-                Flag flag = Instantiate(_flagPrefab, _cursorRaycaster.hitPosition, _flagPrefab.transform.rotation);
+                Flag flag = Instantiate(_flagPrefab, _cursorRaycaster.HitPosition, _flagPrefab.transform.rotation);
                 IsSetFlag?.Invoke(flag.transform);
                 _flagInstalling = false;
                 flag.HasUnit += _baseCreator.CreateNewBase;

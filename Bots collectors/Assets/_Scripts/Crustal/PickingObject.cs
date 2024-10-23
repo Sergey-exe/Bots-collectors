@@ -5,11 +5,10 @@ public class PickingObject : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
 
-    [field: SerializeField] public int Denomination { get; private set; }
-
-    [field: SerializeField] public bool IsFree { get; private set; }
-
     public event UnityAction<GameObject> TransferredToBase;
+    public event UnityAction<Crystal> Discovered;
+
+    [field: SerializeField] public int Denomination { get; private set; }
 
     public void PickUp(Transform parent, float distance)
     {
@@ -17,11 +16,15 @@ public class PickingObject : MonoBehaviour
         transform.localPosition = new Vector3(0f, 0f, distance);
 
         _rigidbody.isKinematic = true;
-        IsFree = false;
     }
 
     public void GiveToBase()
     {
         TransferredToBase?.Invoke(gameObject);
+    }
+
+    public void DestroyCrystal()
+    {
+        Discovered?.Invoke(GetComponent<Crystal>());
     }
 }

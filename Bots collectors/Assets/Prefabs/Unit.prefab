@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2f050b9e77d8bc44aab3219690574ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isWork: 0
   _mover: {fileID: 8053197001050710526}
 --- !u!114 &8053197001050710526
 MonoBehaviour:
@@ -158,6 +157,9 @@ MonoBehaviour:
   _holdDistance: 0
   _handTransform: {fileID: 2206565026085332045}
   _unit: {fileID: 8024962104408338234}
+  _pickingObject: {fileID: 0}
+  _mover: {fileID: 8053197001050710526}
+  _crystalSearcher: {fileID: 0}
 --- !u!65 &3361045889884543789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -177,8 +179,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.6, y: 1.4674754, z: 0.87347233}
-  m_Center: {x: 5.1579574e-10, y: 0.76626194, z: -1.635215}
+  m_Size: {x: 1.6, y: 2.2819016, z: 1.9361463}
+  m_Center: {x: -7.204697e-10, y: 1.173475, z: -2.166564}
 --- !u!1 &3987174995055047254
 GameObject:
   m_ObjectHideFlags: 0

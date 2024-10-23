@@ -363,6 +363,7 @@
 "Assets/_Scripts/Base/UnitSpawner.cs"
 "Assets/_Scripts/BaseCreator.cs"
 "Assets/_Scripts/BaseSpawner.cs"
+"Assets/_Scripts/Crustal/Crystal.cs"
 "Assets/_Scripts/Crustal/PickingObject.cs"
 "Assets/_Scripts/CrystalSpawner.cs"
 "Assets/_Scripts/CursorRaycaster.cs"

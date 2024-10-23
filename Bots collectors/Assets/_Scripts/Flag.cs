@@ -10,7 +10,7 @@ public class Flag : MonoBehaviour
     {
         if (other.TryGetComponent(out Unit unit))
         {
-            if (unit.MoveToFlag)
+            if (unit.IsMoveToFlag)
             {
                 HasUnit?.Invoke(unit, transform);
                 unit.ChangeFlagMoveToFlag(false);

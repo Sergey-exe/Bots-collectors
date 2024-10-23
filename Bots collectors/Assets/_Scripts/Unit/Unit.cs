@@ -7,7 +7,7 @@ public class Unit : MonoBehaviour
 
     public bool IsWork { get; private set; }
 
-    public bool MoveToFlag { get; private set; }
+    public bool IsMoveToFlag { get; private set; }
 
     private void Start()
     {
@@ -31,6 +31,6 @@ public class Unit : MonoBehaviour
 
     public void ChangeFlagMoveToFlag(bool moveToFlag)
     {
-        MoveToFlag = moveToFlag;
+        IsMoveToFlag = moveToFlag;
     }
 }

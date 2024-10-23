@@ -9,17 +9,17 @@ public class BaseCreator : MonoBehaviour
 
     private Unit _startUnit;
 
-    public event UnityAction<BaseCreator> IsCreate;
+    public event UnityAction<BaseCreator> Created;
 
     private void OnEnable()
     {
         if(_spawner)
-            _spawner.OnSpawn += TransferUnitToNewBase;
+            _spawner.Spawned += TransferUnitToNewBase;
     }
 
     private void OnDisable()
     {
-        _spawner.OnSpawn -= TransferUnitToNewBase;
+        _spawner.Spawned -= TransferUnitToNewBase;
     }
 
     public void CreateNewBase(Unit unitInFlag, Transform point)
@@ -34,18 +34,23 @@ public class BaseCreator : MonoBehaviour
     public void InitSpawner(BaseSpawner spawner)
     {
         _spawner = spawner;
-        _spawner.OnSpawn += TransferUnitToNewBase;
+        _spawner.Spawned += TransferUnitToNewBase;
     }
 
     private void TransferUnitToNewBase(Base newBase)
     {
-        TaskDistributor taskDistributor = newBase.GetComponent<TaskDistributor>();
-        FlagSetter flagSetter = GetComponent<FlagSetter>();
-        newBase.GetComponent<BaseCreator>().InitSpawner(_spawner);
-        newBase.GetComponent<FlagSetter>().Init(flagSetter.GetRaycaster(), flagSetter.GetInputReader());
-        _startUnit.SetTaskTransform(newBase.transform);
-        _startUnit.InvokeFree();
-        taskDistributor.AddUnit(_startUnit);
-        IsCreate?.Invoke(this);
+
+        if(newBase.TryGetComponent(out TaskDistributor newBaseTaskDistributor) 
+            & newBase.TryGetComponent(out BaseCreator newBaseBaseCreator) 
+            & newBase.TryGetComponent(out FlagSetter newBaseFlagSetter))
+        {
+            FlagSetter flagSetter = GetComponent<FlagSetter>();
+            newBaseBaseCreator.InitSpawner(_spawner);
+            newBaseFlagSetter.Init(flagSetter.GetRaycaster(), flagSetter.GetInputReader());
+            _startUnit.SetTaskTransform(newBase.transform);
+            _startUnit.InvokeFree();
+            newBaseTaskDistributor.AddUnit(_startUnit);
+            Created?.Invoke(this);
+        }
     }
 }

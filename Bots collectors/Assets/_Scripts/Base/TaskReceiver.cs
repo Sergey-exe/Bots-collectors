@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TaskReceiver : MonoBehaviour
 {
-    [SerializeField] private DataBase _dataBase;
+    [SerializeField] private Database _dataBase;
 
     private void OnTriggerEnter(Collider other)
     {

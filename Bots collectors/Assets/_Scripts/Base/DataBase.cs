@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DataBase : MonoBehaviour
+public class Database : MonoBehaviour
 {
-    public int CountCrystals { get; private set; }
-
     public event UnityAction<int> ChangeCrystals;
+
+    public int CountCrystals { get; private set; }
 
     public void AddCrystals(int count)
     {
