@@ -116,8 +116,7 @@ public class TaskDistributor : MonoBehaviour
         List<Transform> transforms = GetTasksTransforms(freeUnits.Count);
 
         for (int i = 0; i < freeUnits.Count; i++)
-        {
             freeUnits[i].SetTaskTransform(transforms[i]);
-        }
+        
     }
 }

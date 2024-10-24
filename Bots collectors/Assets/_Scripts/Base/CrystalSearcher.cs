@@ -5,6 +5,7 @@ public class CrystalSearcher : MonoBehaviour
 {
     [SerializeField] private float _searchRadius;
     [SerializeField] private List<Transform> _pickingObjects;
+    [SerializeField] private List<Transform> _pickingObjectsT1;
 
     [ContextMenu(nameof(Start))]
     private void Start()
@@ -29,11 +30,7 @@ public class CrystalSearcher : MonoBehaviour
             if(hit.TryGetComponent(out Crystal crystal))
             {
                 crystals.Add(crystal.transform);
-                
-                if (crystal.TryGetComponent(out PickingObject pickingObject))
-                    pickingObject.DestroyCrystal();
-            }
-                
+            }    
         }
 
         return crystals;
@@ -41,11 +38,11 @@ public class CrystalSearcher : MonoBehaviour
 
     public Transform GetCrustal()
     {
-        if(_pickingObjects.Count > 0)
+        if (_pickingObjects.Count > 0)
         {
             Transform pickingObjectTransform = _pickingObjects[0];
             _pickingObjects.RemoveAt(0);
-
+            _pickingObjectsT1.Add(pickingObjectTransform);
             return pickingObjectTransform;
         }
             

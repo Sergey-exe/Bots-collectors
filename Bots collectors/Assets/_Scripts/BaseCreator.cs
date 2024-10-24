@@ -39,6 +39,8 @@ public class BaseCreator : MonoBehaviour
 
     private void TransferUnitToNewBase(Base newBase)
     {
+        if (newBase == null)
+            return;
 
         if(newBase.TryGetComponent(out TaskDistributor newBaseTaskDistributor) 
             & newBase.TryGetComponent(out BaseCreator newBaseBaseCreator) 

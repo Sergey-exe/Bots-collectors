@@ -38,7 +38,7 @@ public class PickerObject : MonoBehaviour
         {
             _pickingObject.PickUp(_handTransform, _holdDistance);
             PickObject?.Invoke(GetComponent<Unit>());
-            _pickingObject.DestroyCrystal();
+            _pickingObject.GiveToBot();
             _isWork = true;
         }
     }

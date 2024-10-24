@@ -6,7 +6,7 @@ public class PickingObject : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
 
     public event UnityAction<GameObject> TransferredToBase;
-    public event UnityAction<Crystal> Discovered;
+    public event UnityAction<Crystal> TransferredToBot;
 
     [field: SerializeField] public int Denomination { get; private set; }
 
@@ -23,8 +23,8 @@ public class PickingObject : MonoBehaviour
         TransferredToBase?.Invoke(gameObject);
     }
 
-    public void DestroyCrystal()
+    public void GiveToBot()
     {
-        Discovered?.Invoke(GetComponent<Crystal>());
+        TransferredToBot?.Invoke(GetComponent<Crystal>());
     }
 }

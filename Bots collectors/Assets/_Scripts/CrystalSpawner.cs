@@ -15,7 +15,7 @@ public class CrystalSpawner : Spawner<PickingObject>
     private void SubscribeToSpawn(PickingObject pickingObject)
     {
         pickingObject.TransferredToBase += DestroyObject;
-        pickingObject.Discovered += DestroyCrystal;
+        pickingObject.TransferredToBot += DestroyCrystal;
     }
 
     private void DestroyObject(GameObject pickingObject)
