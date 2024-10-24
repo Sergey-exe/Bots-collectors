@@ -105,12 +105,13 @@ public class TaskDistributor : MonoBehaviour
 
         for (int i = 0; i < freeUnits.Count; i++)
         {
-            for (int j = 0; j < _pickingObjects.Count; j++)
+            for (int j = _pickingObjects.Count - 1; j >= 0; j--)
             {
                 if (IsRepeatTransform(_pickingObjects[j]) == false)
                 {
                     freeUnits[i].SetTaskTransform(_pickingObjects[j]);
                     _busyPickingObjects.Add(_pickingObjects[j]);
+                    _pickingObjects.Remove(_pickingObjects[j]);
                     break;
                 }
             }

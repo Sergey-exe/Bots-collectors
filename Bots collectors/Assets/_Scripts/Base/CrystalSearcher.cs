@@ -4,19 +4,6 @@ using UnityEngine;
 public class CrystalSearcher : MonoBehaviour
 {
     [SerializeField] private float _searchRadius;
-    //[SerializeField] private List<Transform> _pickingObjects;
-
-    //[ContextMenu(nameof(Start))]
-    ////private void Start()
-    ////{
-    ////    _pickingObjects = Search();
-    ////}
-
-    //private void Update()
-    //{
-    //    if (_pickingObjects.Count == 0)
-    //        _pickingObjects = Search();
-    //}
 
     private List<Transform> Search()
     {

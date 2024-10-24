@@ -6,7 +6,7 @@ public class UnitMover : MonoBehaviour
     [SerializeField] private float _speed;
 
     private float _factor = 2f;
-    [SerializeField] private Transform _target = null;
+    private Transform _target = null;
 
     public event UnityAction Finished;
 
