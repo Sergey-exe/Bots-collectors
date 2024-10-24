@@ -14,6 +14,7 @@ public class PickerObject : MonoBehaviour
     private bool _isWork;
 
     public event UnityAction<Unit> PickObject;
+    public event UnityAction<Transform> GiveObject;
 
     private void OnEnable()
     {
@@ -48,6 +49,7 @@ public class PickerObject : MonoBehaviour
         if (_pickingObject == null)
             return 0;
 
+        GiveObject?.Invoke(_pickingObject.transform);
         _pickingObject.GiveToBase();
         _unit.InvokeFree();
         _isWork = false;

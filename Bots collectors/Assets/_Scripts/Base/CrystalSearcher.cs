@@ -4,20 +4,19 @@ using UnityEngine;
 public class CrystalSearcher : MonoBehaviour
 {
     [SerializeField] private float _searchRadius;
-    [SerializeField] private List<Transform> _pickingObjects;
-    [SerializeField] private List<Transform> _pickingObjectsT1;
+    //[SerializeField] private List<Transform> _pickingObjects;
 
-    [ContextMenu(nameof(Start))]
-    private void Start()
-    {
-        _pickingObjects = Search();
-    }
+    //[ContextMenu(nameof(Start))]
+    ////private void Start()
+    ////{
+    ////    _pickingObjects = Search();
+    ////}
 
-    private void Update()
-    {
-        if (_pickingObjects.Count == 0)
-            _pickingObjects = Search();
-    }
+    //private void Update()
+    //{
+    //    if (_pickingObjects.Count == 0)
+    //        _pickingObjects = Search();
+    //}
 
     private List<Transform> Search()
     {
@@ -27,26 +26,17 @@ public class CrystalSearcher : MonoBehaviour
 
         foreach (Collider hit in hits)
         {
-            if(hit.TryGetComponent(out Crystal crystal))
+            if (hit.TryGetComponent(out Crystal crystal))
             {
                 crystals.Add(crystal.transform);
-            }    
+            }
         }
 
         return crystals;
     }
 
-    public Transform GetCrustal()
+    public List<Transform> GetCrustals()
     {
-        if (_pickingObjects.Count > 0)
-        {
-            Transform pickingObjectTransform = _pickingObjects[0];
-            _pickingObjects.RemoveAt(0);
-            _pickingObjectsT1.Add(pickingObjectTransform);
-            return pickingObjectTransform;
-        }
-            
-
-        return null;
+        return Search();
     }
 }
