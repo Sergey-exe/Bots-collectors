@@ -1,7 +1,5 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class TaskDistributor : MonoBehaviour
 {
@@ -9,6 +7,7 @@ public class TaskDistributor : MonoBehaviour
     [SerializeField] private CrystalSearcher _crystalSearcher;
     [SerializeField] private Transform _baseTransform;
     [SerializeField] private FlagSetter _flagSetter;
+    [SerializeField] private BaseCreator _baseCreator;
     [SerializeField] private List<Unit> _units;
     [SerializeField] private List<Transform> _pickingObjects;
     [SerializeField] private List<Transform> _busyPickingObjects;
@@ -44,44 +43,6 @@ public class TaskDistributor : MonoBehaviour
             GiveNewBaseFlag();
         else
             GiveTasks();
-    }
-
-    public void GiveNewBaseFlag()
-    {
-        List<Unit> freeUnits = SearchFreeUnits();
-
-        for (int i = _newBasesTransforms.Count - 1; i >= 0; i--)
-        {
-            for (int j = freeUnits.Count - 1; j >= 0; j--)
-            {
-                freeUnits[j].SetTaskTransform(_newBasesTransforms[i]);
-                freeUnits[j].ChangeFlagMoveToFlag(true);
-                PickerObject pickerObject = freeUnits[j].GetComponent<PickerObject>();
-                pickerObject.PickObject -= GiveBaseTransform;
-                pickerObject.GiveObject -= AcceptTransform;
-                _newBasesTransforms.RemoveAt(i);
-                _units.Remove(freeUnits[j]);
-                freeUnits.Remove(freeUnits[j]);
-            }
-        }
-    }
-
-    public void AddNewBaseFlag(Transform flagTransform)
-    {
-        _newBasesTransforms.Add(flagTransform);
-    }
-
-    public void GiveBaseTransform(Unit unit)
-    {
-        unit.SetTaskTransform(_baseTransform);
-    }
-
-    public void AddUnit(Unit unit)
-    {
-        PickerObject pickerObject = unit.GetComponent<PickerObject>();
-        pickerObject.PickObject += GiveBaseTransform;
-        pickerObject.GiveObject += AcceptTransform;
-        _units.Add(unit);
     }
 
     private List<Unit> SearchFreeUnits()
@@ -122,7 +83,7 @@ public class TaskDistributor : MonoBehaviour
     {
         foreach (Transform busyTransform in _busyPickingObjects)
         {
-            if(busyTransform == transform)
+            if (busyTransform == transform)
             {
                 _pickingObjects.Remove(transform);
                 return true;
@@ -135,5 +96,45 @@ public class TaskDistributor : MonoBehaviour
     private void AcceptTransform(Transform transform)
     {
         _busyPickingObjects.Remove(transform);
+    }
+
+    public void GiveNewBaseFlag()
+    {
+        List<Unit> freeUnits = SearchFreeUnits();
+
+        for (int i = _newBasesTransforms.Count - 1; i >= 0; i--)
+        {
+            for (int j = freeUnits.Count - 1; j >= 0; j--)
+            {
+                freeUnits[j].SetTaskTransform(_newBasesTransforms[i]);
+                freeUnits[j].ChangeFlagMoveToFlag(true);
+                PickerObject pickerObject = freeUnits[j].GetComponent<PickerObject>();
+                pickerObject.PickObject -= GiveBaseTransform;
+                pickerObject.GiveObject -= AcceptTransform;
+                _newBasesTransforms.RemoveAt(i);
+                freeUnits[j].GetComponent<UnitMover>().Finished += _baseCreator.CreateNewBase;
+
+                _units.Remove(freeUnits[j]);
+                freeUnits.Remove(freeUnits[j]);
+            }
+        }
+    }
+
+    public void AddNewBaseFlag(Transform flagTransform)
+    {
+        _newBasesTransforms.Add(flagTransform);
+    }
+
+    public void GiveBaseTransform(Unit unit)
+    {
+        unit.SetTaskTransform(_baseTransform);
+    }
+
+    public void AddUnit(Unit unit)
+    {
+        PickerObject pickerObject = unit.GetComponent<PickerObject>();
+        pickerObject.PickObject += GiveBaseTransform;
+        pickerObject.GiveObject += AcceptTransform;
+        _units.Add(unit);
     }
 }

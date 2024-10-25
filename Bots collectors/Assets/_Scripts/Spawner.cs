@@ -9,12 +9,12 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] private float _minOffset;
     [SerializeField] private float _maxOffset;
     [SerializeField] private float _spawnDelay;
-    [SerializeField] private bool _spawnToStart;
+    [SerializeField] private bool _spawnOnStart;
     [SerializeField] private bool _autoSpawn;
     [SerializeField] Transform _spawnPoint;
 
-    private Vector3 _defaultTransform;
-    private Coroutine _spawnToTime;
+    private Vector3 _defaultPosition;
+    private Coroutine _spawning;
 
     public event UnityAction<T> Spawned;
 
@@ -23,44 +23,54 @@ public class Spawner<T> : MonoBehaviour where T : MonoBehaviour
         if(_minOffset > _maxOffset)
             _minOffset = _maxOffset;
 
-        _defaultTransform = _spawnPoint.position;
+        _defaultPosition = _spawnPoint.position;
 
-        if(_spawnToStart)
+        if(_spawnOnStart)
             ArrangeSpawnObjects(_spawnCount);
     }
 
     private void Update()
     {
         if(_autoSpawn)
-            if (_spawnToTime == null)
-                _spawnToTime = StartCoroutine(SpawnToTime());
+            if (_spawning == null)
+                _spawning = StartCoroutine(Spawning());
     }
 
-    private IEnumerator SpawnToTime()
+    private IEnumerator Spawning()
     {
-        WaitForSeconds waitForSeconds = new WaitForSeconds(_spawnDelay);
-
-        yield return waitForSeconds;
+        yield return new WaitForSeconds(_spawnDelay);
 
         ArrangeSpawnObjects(_spawnCount);
-        _spawnToTime = null;
-    }
-
-    public virtual void ArrangeSpawnObjects(int spawnCount)
-    {
-        for(int i = 0; i < spawnCount; i++)
-        {
-            T spawnObject = Instantiate(_prefab, _spawnPoint.transform.position, _spawnPoint.transform.rotation);
-            _spawnPoint.transform.position = new Vector3(_spawnPoint.position.x + Random.Range(_minOffset, _maxOffset), 
-                _spawnPoint.position.y, _spawnPoint.position.z + Random.Range(_minOffset, _maxOffset));
-            Spawned?.Invoke(spawnObject);
-        }
-
-        _spawnPoint.position = _defaultTransform;
+        _spawning = null;
     }
 
     public void InitSpawnPoint(Transform newSpawnPoint)
     {
         _spawnPoint = newSpawnPoint;
+    }
+
+
+    public virtual T SpawnObject()
+    {
+        T spawnObject = Instantiate(_prefab, _spawnPoint.transform.position, _spawnPoint.transform.rotation);
+        _spawnPoint.transform.position = new Vector3(_spawnPoint.position.x + Random.Range(_minOffset, _maxOffset),
+            _spawnPoint.position.y, _spawnPoint.position.z + Random.Range(_minOffset, _maxOffset));
+        Spawned?.Invoke(spawnObject);
+        return spawnObject;
+    }
+
+    public void DestroyObject(T destroyedObject)
+    {
+        Destroy(destroyedObject.gameObject);
+    }
+
+    public void ArrangeSpawnObjects(int spawnCount)
+    {
+        for(int i = 0; i < spawnCount; i++)
+        {
+            SpawnObject();
+        }
+
+        _spawnPoint.position = _defaultPosition;
     }
 }

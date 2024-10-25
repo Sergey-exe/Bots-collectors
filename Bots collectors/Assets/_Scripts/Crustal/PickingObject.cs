@@ -5,7 +5,7 @@ public class PickingObject : MonoBehaviour
 {
     [SerializeField] private Rigidbody _rigidbody;
 
-    public event UnityAction<GameObject> TransferredToBase;
+    public event UnityAction<PickingObject> TransferredToBase;
     public event UnityAction<Crystal> TransferredToBot;
 
     [field: SerializeField] public int Denomination { get; private set; }
@@ -20,7 +20,7 @@ public class PickingObject : MonoBehaviour
 
     public void GiveToBase()
     {
-        TransferredToBase?.Invoke(gameObject);
+        TransferredToBase?.Invoke(this);
     }
 
     public void GiveToBot()

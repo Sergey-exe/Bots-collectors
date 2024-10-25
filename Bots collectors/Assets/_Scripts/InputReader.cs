@@ -4,11 +4,6 @@ public class InputReader : MonoBehaviour
 {
     [SerializeField] private KeyCode[] _keysSetFlag;
 
-    public bool DownButtonSetFlag()
-    {
-        return DownButton(_keysSetFlag);
-    }
-
     private bool DownButton(KeyCode[] keyCodes)
     {
         foreach (KeyCode keyCode in keyCodes)
@@ -16,5 +11,10 @@ public class InputReader : MonoBehaviour
                 return true;
 
         return false;
+    }
+
+    public bool DownButtonSetFlag()
+    {
+        return DownButton(_keysSetFlag);
     }
 }

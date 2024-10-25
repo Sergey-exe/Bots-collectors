@@ -8,7 +8,6 @@ public class PickerObject : MonoBehaviour
     [SerializeField] private Unit _unit;
     [SerializeField] private PickingObject _pickingObject;
     [SerializeField] private UnitMover _mover;
-    [SerializeField] private CrystalSearcher _crystalSearcher;
 
     private bool _isFinish;
     private bool _isWork;
@@ -33,12 +32,12 @@ public class PickerObject : MonoBehaviour
                 _pickingObject = pickingObject;
     }
 
-    public void Finish()
+    public void Finish(Unit unit, Transform transform)
     {
         if(_pickingObject)
         {
             _pickingObject.PickUp(_handTransform, _holdDistance);
-            PickObject?.Invoke(GetComponent<Unit>());
+            PickObject?.Invoke(unit);
             _pickingObject.GiveToBot();
             _isWork = true;
         }
@@ -51,7 +50,7 @@ public class PickerObject : MonoBehaviour
 
         GiveObject?.Invoke(_pickingObject.transform);
         _pickingObject.GiveToBase();
-        _unit.InvokeFree();
+        _unit.CancelTasks();
         _isWork = false;
 
         return _pickingObject.Denomination;

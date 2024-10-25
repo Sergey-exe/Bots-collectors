@@ -1,30 +1,10 @@
-using UnityEngine;
-
 public class CrystalSpawner : Spawner<PickingObject> 
 {
-    private void OnEnable()
+    public override PickingObject SpawnObject()
     {
-        Spawned += SubscribeToSpawn;
-    }
-
-    private void OnDisable()
-    {
-        Spawned -= SubscribeToSpawn;
-    }
-
-    private void SubscribeToSpawn(PickingObject pickingObject)
-    {
+        PickingObject pickingObject = base.SpawnObject();
         pickingObject.TransferredToBase += DestroyObject;
-        pickingObject.TransferredToBot += DestroyCrystal;
-    }
 
-    private void DestroyObject(GameObject pickingObject)
-    {
-        Destroy(pickingObject);
-    }
-
-    private void DestroyCrystal(Crystal crystal)
-    {
-        Destroy(crystal);
+        return pickingObject;
     }
 }

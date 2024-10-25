@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,21 +20,6 @@ public class BaseCreator : MonoBehaviour
         _spawner.Spawned -= TransferUnitToNewBase;
     }
 
-    public void CreateNewBase(Unit unitInFlag, Transform point)
-    {
-        int countSpawnBases = 1;
-
-        _startUnit = unitInFlag;
-        _spawner.InitSpawnPoint(point);
-        _spawner.ArrangeSpawnObjects(countSpawnBases);
-    }
-
-    public void InitSpawner(BaseSpawner spawner)
-    {
-        _spawner = spawner;
-        _spawner.Spawned += TransferUnitToNewBase;
-    }
-
     private void TransferUnitToNewBase(Base newBase)
     {
         if (newBase == null)
@@ -50,9 +33,24 @@ public class BaseCreator : MonoBehaviour
             newBaseBaseCreator.InitSpawner(_spawner);
             newBaseFlagSetter.Init(flagSetter.GetRaycaster(), flagSetter.GetInputReader());
             _startUnit.SetTaskTransform(newBase.transform);
-            _startUnit.InvokeFree();
+            _startUnit.CancelTasks();
             newBaseTaskDistributor.AddUnit(_startUnit);
             Created?.Invoke(this);
         }
+    }
+
+    public void InitSpawner(BaseSpawner spawner)
+    {
+        _spawner = spawner;
+        _spawner.Spawned += TransferUnitToNewBase;
+    }
+
+    public void CreateNewBase(Unit unitInFlag, Transform point)
+    {
+        int countSpawnBases = 1;
+
+        _startUnit = unitInFlag;
+        _spawner.InitSpawnPoint(point);
+        _spawner.ArrangeSpawnObjects(countSpawnBases);
     }
 }

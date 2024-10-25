@@ -1,6 +1,5 @@
-﻿using Unity.VisualScripting.Antlr3.Runtime.Tree;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
+
 public class Unit : MonoBehaviour 
 {
     [SerializeField] private UnitMover _mover;
@@ -11,7 +10,7 @@ public class Unit : MonoBehaviour
 
     private void Start()
     {
-        InvokeFree();
+        CancelTasks();
     }
 
     public void SetTaskTransform(Transform transform)
@@ -23,7 +22,7 @@ public class Unit : MonoBehaviour
         IsWork = true;
     }
 
-    public void InvokeFree()
+    public void CancelTasks()
     {
         _mover.SetTackTransform(null);
         IsWork = false;
